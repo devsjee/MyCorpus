@@ -71,7 +71,9 @@ def plot_vocab_hist(fname):
 		vocab_list.append((VOCAB[key],key))
 		print key+ " "+ str(VOCAB[key])
 
+	
 	vocab_list.sort()
+	
 	norm = vocab_list[-1][0]
 
 	freq = [x[0] for x in vocab_list]
@@ -88,12 +90,20 @@ def plot_vocab_hist(fname):
 
 	pylab.show()
 
+
+def print_analysis():
+	global VOCAB
+	with open('analysis_freq1.txt','w') as f:
+		for item in VOCAB:
+			if VOCAB[item] == 1:
+				f.write(item+" "+str(VOCAB[item]))
+	
 def main():
 	for i in range(1,N+1):
 		fname = "f"+str(i)+".txt"
 		process_text(fname)
 		add_to_corpus(fname)
 		plot_vocab_hist(fname)		
-
+		print_analysis()
 if __name__ == '__main__':
 	main()
